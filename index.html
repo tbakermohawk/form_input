@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ReactJS Form Input Handling</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <style>
+  .myclass {
+    color: red;
+  }
+  </style>
+</head>
+
+<body>
+
+  <div id="container"></div>
+
+
+  <script type="text/babel">
+
+   /*
+     A controlled component where the state of the input textbox is
+     part of the component's state and managed by the component itself.
+   */
+   class FormExample extends React.Component
+   {
+
+     constructor(props)
+     {
+       super(props);
+       this.state =
+       {
+         toshow: "",
+         input: ""
+       };
+     }
+
+     inputStateChange(event) {
+       this.setState({input: event.target.value});
+     }
+
+     submitFunc() {
+       this.setState({
+         toshow: this.state.input,
+         input: ""
+       });
+     }
+
+     render() {
+       return (
+         <div>
+           <h1>Form Data</h1>
+           <input type="text" onChange={this.inputStateChange.bind(this)}
+                  value={this.state.input} />
+           <button onClick={this.submitFunc.bind(this)}>Submit</button>
+           <h1>
+            {this.state.toshow}
+           </h1>
+         </div>
+       );
+     }
+   };
+
+
+   ReactDOM.render(
+     <FormExample />,
+     document.querySelector("#container")
+   );
+
+  </script>
+</body>
+
+</html>
